@@ -18,6 +18,7 @@ class shiftModel extends dbModel
         $this->setCollection($shiftCollection);
     }
 
+    /** @var array $shift schema */
     private $shift = [
         'manager_id' => '',    //reference
         'employee_id' => '',  //ref
@@ -120,6 +121,10 @@ class shiftModel extends dbModel
         return $employeeIDs;
     }
 
+    /**
+     * @param $employee
+     * @return array
+     */
     public function getShiftsByEmployee($employee)
     {
 
