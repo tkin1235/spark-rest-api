@@ -2,7 +2,7 @@
 rest API built in spark ADR framework
 
 This is an attempt at a restAPI built with spark ADR (https://github.com/sparkphp/spark) to fulfull the following requirements,
-as fully specified at https://raw.githubusercontent.com/wheniwork/standards/master/project.md
+as specified at: https://raw.githubusercontent.com/wheniwork/standards/master/project.md
 
 ## User stories
 
