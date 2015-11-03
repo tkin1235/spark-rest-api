@@ -59,18 +59,14 @@
 		{
 
 			$this->stories = new \stories($this->shiftModel, $this->userModel, $this->tokensModel, $this->token);
-			$return = [];
-
-			if (!empty($input['name'])) {
-				$name = $input['name'];
-			}
-
 
 			if (!empty($input['startTime'] && !empty($input['endTime']))) {
 				$startTime = \DateTime::createFromFormat('m-d-Y', $input['startTime']);
 				$endTime = \DateTime::createFromFormat('m-d-Y', $input['endTime']);
 
 				$success = $this->stories->getShiftsBetween($startTime, $endTime);
+			} else {
+				throw new \Exception('improper API usage');
 			}
 
 			return (new Payload)

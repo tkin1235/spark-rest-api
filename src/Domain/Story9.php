@@ -7,7 +7,8 @@
 	use Spark\Payload;
 
 
-	class Story3 implements DomainInterface
+	/** TODO STOP COPY AND PASTING THESE CLASSES */
+	class Story9 implements DomainInterface
 	{
 
 		private $token;
@@ -45,7 +46,6 @@
 			$this->tokensModel = new \tokensModel($tokensCollection, $this->token);
 		}
 
-
 		private function setTokenFromHeaders()
 		{
 			$this->token = $this->headers['token'];
@@ -58,20 +58,23 @@
 
 		public function __invoke(array $input)
 		{
-
 			$this->stories = new \stories($this->shiftModel, $this->userModel, $this->tokensModel, $this->token);
 
 			if (!empty($input['employeeID'])) {
 				$employeeID = $input['employeeID'];
-				$return = $this->stories->shiftsForEmployee($employeeID);
+				$success = $this->stories->getEmployeeDetails($employeeID);
 			} else {
-				throw new \Exception('improper API usage');
+				throw new \Exception('Employee ID is required');
+			}
+
+			if ($success === null) {
+				$success = 'Employee not found';
 			}
 
 			return (new Payload)
 				->withStatus(Payload::OK)
 				->withOutput([
-					'EmployeeShifts' => $return,
+					'result' => $success,
 				]);
 		}
 	}

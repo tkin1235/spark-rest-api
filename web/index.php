@@ -23,6 +23,7 @@
 		$r->get('/story6/{startTime}/{endTime}', 'Spark\Project\Domain\Story6');
 		$r->put('/story7/{shiftID}/{newStartTime}/{newEndTime}', 'Spark\Project\Domain\Story7');
 		$r->put('/story8/{shiftID}/{employeeID}', 'Spark\Project\Domain\Story8');
+		$r->get('/story9/{employeeID}', 'Spark\Project\Domain\Story9');
 
 	});
 

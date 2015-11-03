@@ -60,17 +60,15 @@
 		{
 
 			$this->stories = new \stories($this->shiftModel, $this->userModel, $this->tokensModel, $this->token);
-			$return = [];
 
-			if (!empty($input['name'])) {
-				$name = $input['name'];
-			}
 			if (!empty($input['shiftID'] && !empty($input['employeeID']))) {
 
 				$shiftID = $input['shiftID'];
 				$employeeID = $input['shiftID'];
 
 				$success = $this->stories->assignEmployeetoShift($employeeID, $shiftID);
+			} else {
+				throw new \Exception('improper API usage');
 			}
 
 			return (new Payload)

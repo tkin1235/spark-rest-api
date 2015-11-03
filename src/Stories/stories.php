@@ -1,13 +1,11 @@
 <?php
 
 	/**
-	 * Created by PhpStorm.
-	 * User: kisgal21
-	 * Date: 11/1/15
-	 * Time: 2:55 PM
+	 * Class stories
 	 */
 	class stories
 	{
+		/** @var userModel $userModel */
 		private $userModel;
 		/** @var shiftModel $shiftModel */
 		private $shiftModel;
@@ -67,8 +65,7 @@
 		 * @throws userModelException
 		 */
 		public function shiftsForEmployee($userID)
-		{    //story 1
-
+		{
 			$this->setEmployeeAccess();
 
 			$employee = $this->userModel->findUserByArray([
@@ -159,6 +156,16 @@
 		 */
 		public function createShiftForEmployee($employeeID, $startTime, $endTime, $break = 0.25)
 		{
+			if (!$employeeID) {
+				throw new Exception('employee ID is required');
+			}
+			if (!$startTime) {
+				throw new Exception('start time is required');
+			}
+			if (!$endTime) {
+				throw new Exception('end time is required');
+			}
+
 			$this->setManagerAccess();
 			$managerID = $this->tokenModel->getUserFromToken($this->token);
 

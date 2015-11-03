@@ -59,12 +59,6 @@
 		{
 
 			$this->stories = new \stories($this->shiftModel, $this->userModel, $this->tokensModel, $this->token);
-			$return = [];
-
-			if (!empty($input['name'])) {
-				$name = $input['name'];
-			}
-
 
 			if (!empty($input['employeeID']) && !empty($input['startTime'] && !empty($input['endTime']))) {
 				$employeeID = $input['employeeID'];
@@ -74,10 +68,9 @@
 				$break = !empty($input['break']) ? $input['break'] : 0; //This allows employers to easily "forget" to add the break time :P
 
 				$success = $this->stories->createShiftForEmployee($employeeID, $startTime, $endTime, $break);
+			} else {
+				throw new \Exception('improper API usage');
 			}
-
-			print_r($success);
-			die();
 
 			return (new Payload)
 				->withStatus(Payload::OK)

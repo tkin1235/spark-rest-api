@@ -45,7 +45,7 @@
 		 */
 		public function getUserById($id)
 		{
-			if (!isset($id)) {   //TODO type id
+			if (!isset($id)) {
 				throw new userModelException('id is required');
 			}
 

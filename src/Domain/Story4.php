@@ -60,24 +60,18 @@
 		{
 
 			$this->stories = new \stories($this->shiftModel, $this->userModel, $this->tokensModel, $this->token);
-			$return = [];
-
-			if (!empty($input['name'])) {
-				$name = $input['name'];
-			}
 
 			if (!empty($input['employeeID'])) {
 				$employeeID = $input['employeeID'];
 				$managers = $this->stories->getManagersByEmployeeID($employeeID);
+			} else {
+				throw new \Exception('improper API usage');
 			}
-
-			print_r($managers);
-			die();
 
 			return (new Payload)
 				->withStatus(Payload::OK)
 				->withOutput([
-					'hello' => $return,
+					'managers' => $managers,
 				]);
 		}
 	}

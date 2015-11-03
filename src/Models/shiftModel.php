@@ -92,7 +92,7 @@
 				'created_at'  => $date,
 				'employee_id' => $employeeID,
 				'updated_at'  => $date,
-				'id'          => '',    //shiftID
+				'id'          => uniqid(),    //shiftID
 				'_id'         => null,  //Mongo internal ID
 				'start_time'  => new MongoDate($startTime->getTimeStamp()),
 				'end_time'    => new MongoDate($endTime->getTimeStamp())

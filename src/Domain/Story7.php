@@ -60,19 +60,16 @@
 		{
 
 			$this->stories = new \stories($this->shiftModel, $this->userModel, $this->tokensModel, $this->token);
-			$return = [];
 
-			if (!empty($input['name'])) {
-				$name = $input['name'];
-			}
 
 			if (!empty($input['shiftID'] && !empty($input['newStartTime'] && !empty($input['newEndTime'])))) {
 				$startTime = \DateTime::createFromFormat('m-d-Y', $input['newStartTime']);
 				$endTime = \DateTime::createFromFormat('m-d-Y', $input['newEndTime']);
 				$shiftID = $input['shiftID'];
 
-
 				$success = $this->stories->updateShift($shiftID, $startTime, $endTime);
+			} else {
+				throw new \Exception('improper API usage');
 			}
 
 			return (new Payload)

@@ -74,6 +74,8 @@
 				$endTime = \DateTime::createFromFormat('m-d-Y', $end);
 
 				$return = $this->stories->getEmployeesWorkingBetween($startTime, $endTime);
+			} else {
+				throw new \Exception('improper API usage');
 			}
 
 			return (new Payload)
