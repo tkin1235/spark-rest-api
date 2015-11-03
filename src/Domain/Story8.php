@@ -7,7 +7,8 @@
 	use Spark\Payload;
 
 
-	class Story4 implements DomainInterface
+	/** TODO STOP COPY AND PASTING THESE CLASSES */
+	class Story7 implements DomainInterface
 	{
 
 		private $token;
@@ -45,7 +46,6 @@
 			$this->tokensModel = new \tokensModel($tokensCollection, $this->token);
 		}
 
-
 		private function setTokenFromHeaders()
 		{
 			$this->token = $this->headers['token'];
@@ -65,19 +65,18 @@
 			if (!empty($input['name'])) {
 				$name = $input['name'];
 			}
+			if (!empty($input['shiftID'] && !empty($input['employeeID']))) {
 
-			if (!empty($input['employeeID'])) {
-				$employeeID = $input['employeeID'];
-				$managers = $this->stories->getManagersByEmployeeID($employeeID);
+				$shiftID = $input['shiftID'];
+				$employeeID = $input['shiftID'];
+
+				$success = $this->stories->assignEmployeetoShift($employeeID, $shiftID);
 			}
-
-			print_r($managers);
-			die();
 
 			return (new Payload)
 				->withStatus(Payload::OK)
 				->withOutput([
-					'hello' => $return,
+					'result' => $success,
 				]);
 		}
 	}
