@@ -32,6 +32,7 @@
 		}
 
 		/**
+		 * @unused?
 		 * generalized mongo query
 		 * @param array $query
 		 * @param MongoCollection $collection

@@ -72,8 +72,17 @@
 			return iterator_to_array($result);
 		}
 
+		/**
+		 * Get Users by array of Ids
+		 * @param $ids
+		 * @return array
+		 * @throws userModelException
+		 */
 		public function getUsersByIds($ids)
 		{
+			if(!count($ids)){
+				throw new userModelException('id array is required');
+			}
 
 			$query = ['$or' => []];
 			foreach ($ids as $id) {
@@ -115,10 +124,6 @@
 			]);
 		}
 
-		private function userQuery($query = [])
-		{
-			return $this->collection->find($query);
-		}
 	}
 
 

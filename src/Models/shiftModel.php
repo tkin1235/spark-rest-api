@@ -27,7 +27,6 @@
 			'end_time'    => '',
 			'created_at',
 			'updated_at'
-
 		];
 
 		/**
@@ -86,7 +85,6 @@
 		 */
 		public function createShift($employeeID, $managerID, $startTime, $endTime, $break = 0.25)
 		{
-
 			$date = new MongoDate();
 			$shift = [
 				'break'       => $break,
@@ -106,6 +104,7 @@
 		}
 
 		/**
+		 * Returns employees working shifts between start/end times
 		 * @param \DateTime $startTime
 		 * @param \DateTime $endTime
 		 * @return Array
@@ -130,12 +129,13 @@
 		}
 
 		/**
+		 * return array of shifts of employees
+		 * @todo, return JUST shifts, not the whole object
 		 * @param $employee
 		 * @return array
 		 */
 		public function getShiftsByEmployee($employee)
 		{
-
 			$shifts = $this->collection->find([
 				'employee_id' => (string)$employee['_id']
 			]);
@@ -144,6 +144,7 @@
 		}
 
 		/**
+		 * Updates start/end times of shift with shiftID
 		 * @param $shiftID
 		 * @param \DateTime $startTime
 		 * @param \DateTime $endTime
@@ -164,10 +165,14 @@
 			return $this->collection->update($query, $newRecord);
 		}
 
+		/**
+		 * Assigns employee (mongo object) to shiftID
+		 * @param $employee
+		 * @param $shiftID
+		 * @return bool
+		 */
 		public function assignEmployeeToShift($employee, $shiftID)
 		{
-
-
 			$query = [
 				'id' => $shiftID
 			];

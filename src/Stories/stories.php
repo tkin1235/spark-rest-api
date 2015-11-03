@@ -44,6 +44,20 @@
 		}
 
 		/**
+		 * Gets shifts from user ID (string)
+		 * @param String $userID
+		 * @return array
+		 * @throws userModelException
+		 */
+		private function getShiftsByEmployeeID($userID)
+		{
+			$userObject = $this->userModel->getUserById($userID);
+			$shifts = $this->shiftModel->getShiftsByEmployee($userObject);
+
+			return $shifts;
+		}
+
+		/**
 		 * Story 1:
 		 * As an employee, I want to know when I am working, by being able to see all of the shifts assigned to me.
 		 * aka Get by user ID
@@ -227,21 +241,6 @@
 			$this->setManagerAccess();
 
 			return $this->userModel->getUserById($employeeID);
-		}
-
-
-		/**
-		 * Gets shifts from user ID (string)
-		 * @param String $userID
-		 * @return array
-		 * @throws userModelException
-		 */
-		private function getShiftsByEmployeeID($userID)
-		{
-			$userObject = $this->userModel->getUserById($userID);
-			$shifts = $this->shiftModel->getShiftsByEmployee($userObject);
-
-			return $shifts;
 		}
 
 	}

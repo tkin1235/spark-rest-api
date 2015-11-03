@@ -16,9 +16,15 @@
 
 		}
 
+		/**
+		 * Gets token from DB
+		 * @TODO these should be hashed or encrypted
+		 * @param $token
+		 * @return array|null
+		 * @throws Exception
+		 */
 		private function getToken($token)
 		{
-
 			$tokenResult = $this->collection->findOne([
 				'token' => $token
 			]);
@@ -30,6 +36,13 @@
 			}
 		}
 
+		/**
+		 * Get field on token
+		 * @todo don't hardcode these indices, pull them from a the schema
+		 * @param $token
+		 * @return mixed
+		 * @throws Exception
+		 */
 		public function getTokenAccess($token)
 		{
 			if (!$access = $this->getToken($token)['access']) {
@@ -39,6 +52,13 @@
 			return $access;
 		}
 
+		/**
+		 * Gets user from token
+		 * @todo don't hardcode these indices, pull them from a the schema
+		 * @param $token
+		 * @return mixed
+		 * @throws Exception
+		 */
 		public function getUserFromToken($token)
 		{
 			if (!$userID = $this->getToken($token)['user_id']) {
